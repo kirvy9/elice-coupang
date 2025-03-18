@@ -33,6 +33,17 @@ class TestMainPage2:
 
             time.sleep(10)
 
+            main_page = MainPage(driver)
+            main_page.click_by_LINK_TEXT('마이쿠팡')
+ 
+            wait.until(EC.url_contains("mc.coupang.com"))
+            assert "mc.coupang.com" in driver.current_url
+
         except NoSuchElementException as e:
+            driver.save_screenshot('메인페이지(로그인)-마이쿠팡-실패-노서치')
+            assert False
+        
+        except TimeoutException as e:
+            driver.save_screenshot('메인페이지(로그인)-마이쿠팡-실패-타임에러.jpg')
             assert False
 
